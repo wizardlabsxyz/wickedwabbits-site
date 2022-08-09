@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=block');
+
+.App {
+  text-align: center;
+  /* overflow: scroll; */
+  width: 100vw;
+  height: 100vh;
+}
+
+.RabbitHole-hole {
+  background-image: url('https://cdn.kapwing.com/final_62c21ca10682b4007a7ff537_694563.gif');
+  background-position: center;
+  background-size: 200%;
+  width: 300px;
+  height: 300px; 
+  border-radius: 100%; 
+  position: absolute
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+
+.App-header {
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.text {
+  font-weight: 700;
+  font-family: 'Amatic SC', cursive;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.wiggle:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+.wiggle-no-hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  overflow: hidden; 
+  /* height: '100%'; 
+  width: '100%';  */
+  /* overflow-x: hidden; */
+}
+
+.rabbit-cursor {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🐰</text></svg>")
+      16 0, auto;
+}
+
+
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+
+span {
+  font-family: 'Amatic SC', cursive;
+  font-size: calc(10px + 2vmin);
+  font-weight: 700;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.custom-btn {
+  color: #fff;
+  border-radius: 1vmin;
+  font-weight: 700;
+  font-family: 'Amatic SC', cursive;
+  font-size: calc(10px + 2vmin);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+}
+
+.btn-3 {
+  background: linear-gradient(0deg, rgb(25, 25, 26) 0%, rgb(142, 160, 137) 100%);
+  width: 130px;
+  height: 40px;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+  
+}
+.btn-3 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.btn-3:before,
+.btn-3:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  top: 0;
+  background: #e33c58;
+  transition: all 0.3s ease;
+}
+.btn-3:before {
+  height: 0%;
+  width: 2px;
+}
+.btn-3:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3:hover{
+   background: transparent;
+  box-shadow: none;
+}
+.btn-3:hover:before {
+  height: 100%;
+}
+.btn-3:hover:after {
+  width: 100%;
+}
+.btn-3 span:hover{
+   color: rgb(0, 0, 0);
+}
+.btn-3 span:before,
+.btn-3 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  background: #e33c58;
+  transition: all 0.3s ease;
+}
+.btn-3 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-3 span:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-3 span:hover:before {
+  height: 100%;
+}
+.btn-3 span:hover:after {
+  width: 100%;
+}
+
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes rainbow{
+  0%{color: orange;}	
+  10%{color: purple;}	
+	20%{color: red;}
+  30%{color: CadetBlue;}
+	40%{color: yellow;}
+  50%{color: coral;}
+	60%{color: green;}
+  70%{color: cyan;}
+  80%{color: DeepPink;}
+  90%{color: DodgerBlue;}
+	100%{color: orange;}
+}
+
+/* Standar Syntax */
+@keyframes rainbow{
+  0%{color: orange;}	
+10%{color: purple;}	
+20%{color: red;}
+30%{color: CadetBlue;}
+40%{color: yellow;}
+50%{color: coral;}
+60%{color: green;}
+70%{color: cyan;}
+80%{color: DeepPink;}
+90%{color: DodgerBlue;}
+100%{color: orange;}
+}
+
+.rainbow {
+  
+  /* Font options */
+ text-shadow: 2px 2px 4px #000000;
+ font-size: 5vh;
+ 
+  /* Chrome, Safari, Opera */
+ -webkit-animation: rainbow 20s infinite; 
+ 
+ /* Internet Explorer */
+ -ms-animation: rainbow 20s infinite;
+ 
+ /* Standard Syntax */
+ animation: rainbow 20s infinite; 
+}
