@@ -4,7 +4,7 @@ const keccak256 = require("keccak256");
 
 exports.handler = async function (event, context) {
 
-    const whitelist = fs.readFileSync(require.resolve('./whitelist.txt')).toString().split("\n");
+    const whitelist = fs.readFileSync(require.resolve('./assets/whitelist.txt')).toString().split("\n");
     for(i in whitelist) {
         console.log(whitelist[i]);
     }
