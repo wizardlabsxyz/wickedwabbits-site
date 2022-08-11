@@ -12,7 +12,7 @@ export default function NetworkErrorDialog({ openDialog, setOpenDialog }) {
     async function switchNetwork() {
         window.ethereum.request({
             method: "wallet_switchEthereumChain",
-            params: [{ chainId: '0x4' }],
+            params: [{ chainId: '0x5' }],
         });
     }
 
@@ -33,15 +33,16 @@ export default function NetworkErrorDialog({ openDialog, setOpenDialog }) {
                 <CloseIcon />
             </IconButton>
             <DialogTitle id="alert-dialog-title">
-                {"Not Connected to Rinkeby Network"}
+                {"Not Connected to Goerli Network"}
             </DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    You aren't connected to the right blockchain network
+                    You aren't connected to the right network
                     <br /><br />
                     <button
                         className='button w-inline-block'
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.stopPropagation();
                             switchNetwork().then(() => {
                                 console.log('ok');
                             })
@@ -52,7 +53,6 @@ export default function NetworkErrorDialog({ openDialog, setOpenDialog }) {
         </Dialog>
     )
 }
-
 
 NetworkErrorDialog.prototypes = {
     openDialog: PropTypes.bool.isRequired,

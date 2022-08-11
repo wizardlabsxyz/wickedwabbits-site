@@ -27,16 +27,23 @@ export default function Home() {
         const video = document.getElementById('video'); 
         setVideoRef(video);
 
-        if(video) {
-            video.onended = () => {
-                mintPageControls.start({
-                    y: -window.innerHeight,
-                    transition: { duration: 1 },
-                }).then(() => {
-                    setAllowFlip(true);
-                });
-            }
-        }
+        mintPageControls.start({
+            y: -window.innerHeight,
+            transition: { duration: 1 },
+        }).then(() => {
+            setAllowFlip(true);
+        });
+
+        // if(video) {
+        //     video.onended = () => {
+        //         mintPageControls.start({
+        //             y: -window.innerHeight,
+        //             transition: { duration: 1 },
+        //         }).then(() => {
+        //             setAllowFlip(true);
+        //         });
+        //     }
+        // }
     }, []);
 
     return (

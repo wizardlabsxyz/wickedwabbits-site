@@ -1,0 +1,8 @@
+{
+  "version": 3,
+  "sources": ["../../home/brian/workspace/wickedwabbits-site/netlify/functions/hello.ts"],
+  "sourceRoot": "/tmp/tmp-18265-I2ZuMxrqFuFV",
+  "sourcesContent": ["import { Handler } from \"@netlify/functions\";\r\n\r\nconst handler: Handler = async (event, context) => {\r\n    return {\r\n        statusCode: 200,\r\n        body: JSON.stringify({ message: \"Hello World\" }),\r\n    };\r\n};\r\n\r\nexport { handler };"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAEA,IAAM,UAAmB,OAAO,OAAO,YAAY;AAC/C,SAAO;AAAA,IACH,YAAY;AAAA,IACZ,MAAM,KAAK,UAAU,EAAE,SAAS,cAAc,CAAC;AAAA,EACnD;AACJ;",
+  "names": []
+}

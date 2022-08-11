@@ -1,20 +1,20 @@
 import React from 'react'
 import {
     Route,
-    Routes,
-    useLocation
+    Routes
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion"
 
 import Home from './Home.js';
+import WhitelistChecker from './WhitelistChecker.js';
 
 function AnimatedRoutes() {
-    const location = useLocation();
 
     return (
         <AnimatePresence>
-            <Routes location={location}>
-                <Route path='/' element={<Home/>}/>
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='wickedlist' element={<WhitelistChecker />} />
             </Routes>
         </AnimatePresence>
     )
