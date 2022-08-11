@@ -4,7 +4,7 @@ const keccak256 = require("keccak256");
 
 exports.handler = async function (event, context) {
 
-    const whitelist = fs.readFileSync(require.resolve('./assets/whitelist.txt')).toString().split("\n");
+    const whitelist = fs.readFileSync('./assets/whitelist.txt').toString().split("\n");
 
     const input = JSON.parse(event.body).address;
     console.log('generating proof for signer: ' + input);
