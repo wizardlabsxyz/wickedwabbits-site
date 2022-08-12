@@ -22,7 +22,6 @@
   pointer-events: none;
 }
 
-
 .App-header {
   z-index: 2;
   min-height: 100vh;
@@ -85,7 +84,6 @@ body {
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🐰</text></svg>")
       16 0, auto;
 }
-
 
 @property --rotate {
   syntax: "<angle>";
@@ -194,7 +192,6 @@ span {
 .btn-3 span:hover:after {
   width: 100%;
 }
-
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes rainbow{

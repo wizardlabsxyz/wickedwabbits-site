@@ -105,11 +105,6 @@ export default function Web3Button() {
             if (contractABI && provider) {
                 const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, provider);
     
-                const proof = await fetch('/.netlify/functions/getProof', {
-                    method: 'POST',
-                    body: JSON.stringify({ address: signerAddress })
-                }).then(response => response.json());
-    
                 const isPaused = await contract.paused();
                 const isPresale = await contract.presale();
                 const isPublicSale = await contract.publicSale();
