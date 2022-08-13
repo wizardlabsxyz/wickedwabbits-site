@@ -31,6 +31,7 @@ function WhitelistChecker() {
                     className='custom-btn'
                     onClick={async () => {
                         try {
+                            setWhitelistState(0);
                             if (!_.isEmpty(value)) {
                                 const response = await fetch('/.netlify/functions/checkWhitelist', {
                                     method: 'POST',

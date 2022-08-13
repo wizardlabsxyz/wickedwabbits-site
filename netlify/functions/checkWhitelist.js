@@ -6,7 +6,7 @@ exports.handler = async function (event, context) {
 
     const whitelist = fs.readFileSync('./assets/whitelist.txt').toString().split("\r\n");
 
-    const input = JSON.parse(event.body).address;);
+    const input = JSON.parse(event.body).address;
 
     const leafNodes = whitelist.map(addr => keccak256(addr));
     const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
