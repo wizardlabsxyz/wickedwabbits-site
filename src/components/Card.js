@@ -85,7 +85,6 @@ export default function Card({ style, allowFlip }) {
                 <span style={{ color: 'black', fontSize: '4vh' }}>No discord</span>        
                 <span style={{ color: 'black', fontSize: '4vh' }}>No utility</span>   
                 <br></br>
-                <span className='rainbow' >6969 supply!</span>
                 <Web3Button />
             </motion.div>
         </div>

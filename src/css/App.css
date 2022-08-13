@@ -157,7 +157,7 @@ span {
   height: 2px;
 }
 .btn-3:hover{
-   background: transparent;
+  background: transparent;
   box-shadow: none;
 }
 .btn-3:hover:before {
@@ -238,3 +238,63 @@ span {
  /* Standard Syntax */
  animation: rainbow 20s infinite; 
 }
+
+.qty .count {
+  color: #000;
+  display: inline-block;
+  vertical-align: top;
+  font-family: 'Amatic SC', cursive;
+  font-size: calc(10px + 2vmin);
+  font-weight: 700;
+  line-height: 30px;
+  padding: 0 2px;
+  min-width: 35px;
+  text-align: center;
+  margin-bottom: 1vh;
+}
+.qty .plus {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  background: linear-gradient(0deg, rgb(25, 25, 26) 0%, rgb(142, 160, 137) 100%);
+  width: 30px;
+  height: 30px;
+  font: 30px/1 Arial,sans-serif;
+  text-align: center;
+  border-radius: 50%;
+  }
+.qty .minus {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  color: white;
+  background: linear-gradient(0deg, rgb(25, 25, 26) 0%, rgb(142, 160, 137) 100%);
+  width: 30px;
+  height: 30px;
+  font: 30px/1 Arial,sans-serif;
+  text-align: center;
+  border-radius: 50%;
+  background-clip: padding-box;
+}
+
+.minus:hover{
+  background-color: #e33c58 !important;
+}
+.plus:hover{
+  background-color: #e33c58 !important;
+}
+
+.count {  
+  border: 0;
+  width: 2%;
+}
+.count::-webkit-outer-spin-button,
+.count::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.count:disabled{
+  background-color:white;
+}
+       
