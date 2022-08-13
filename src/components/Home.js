@@ -22,12 +22,14 @@ export default function Home() {
     const [videoPlaying, setVideoPlaying] = useState(false);
     const [readyForMintPage, setReadyForMintPage] = useState(false);
     const [allowFlip, setAllowFlip] = useState(false);
+    const [clickOverride, setClickOverride] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const video = document.getElementById('video'); 
         setVideoRef(video);
 
-        if(video) {
+        if(video && !clickOverride) {
             video.onended = () => {
                 mintPageControls.start({
                     y: -window.innerHeight,
@@ -45,6 +47,7 @@ export default function Home() {
                 <Loader 
                     style={{ position: 'absolute', height: '50vh', width: '50vw' }}
                     doneCallback={() => {
+                        setIsLoading(false);
                         landingPageControls.start({
                             opacity: 1,
                             transition: { duration: 1 }
@@ -56,17 +59,29 @@ export default function Home() {
                     animate={landingPageControls}
                     style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', opacity: 0 }} 
                     onClick={() => {
-                        if (!videoPlaying) {
-                            spanControls.start({
-                                opacity: 0,
-                                transition: { duration: 1 }
-                            }).then(() => {
+                        if (!isLoading) {
+                            if (!videoPlaying) {
                                 spanControls.start({
-                                    display: 'none'
+                                    opacity: 0,
+                                    transition: { duration: 1 }
+                                }).then(() => {
+                                    spanControls.start({
+                                        display: 'none'
+                                    });
+                                    videoRef.play();
+                                    setVideoPlaying(true);
                                 });
-                                videoRef.play();
-                                setVideoPlaying(true);
-                            });
+                            } else {
+                                if (!clickOverride) {
+                                    mintPageControls.start({
+                                        y: -window.innerHeight,
+                                        transition: { duration: 1 },
+                                    }).then(() => {
+                                        setAllowFlip(true);
+                                    });
+                                    setClickOverride(true);
+                                }
+                            }
                         }
                 }}>
                     <video id={'video'} style={{width: '100vw', height: '100vh', objectFit: 'fill'}} muted>
