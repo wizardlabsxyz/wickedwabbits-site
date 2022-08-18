@@ -1,14 +1,12 @@
 import _ from 'lodash';
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 import { ethers } from "ethers";
 
 import MetamaskErrorDialog from './MetamaskErrorDialog.js';
 import NetworkErrorDialog from './NetworkErrorDialog.js';
-import FailedMintDialog from './FailedMintDialog.js';
 import ErrorDialog from './ErrorDialog.js';
 
-export default function Web3Button() {
+export default function WhitelistCheckerButton({ statusHandler }) {
 
     const SUPPORTED_NETWORKS = ['goerli'];
     const CONTRACT_ADDRESS = '0x7ACA381ed24778faE753e83366bf37Df97e4f439';
@@ -20,13 +18,11 @@ export default function Web3Button() {
     const [signerAddress, setSignerAddress] = useState(undefined);
     const [accounts, setAccounts] = useState(undefined);
     const [isConnected, setConnected] = useState(false);
-    const [isSaleLive, setIsSaleLive] = useState(false);
     const [networkSupported, setNetworkSupported] = useState(undefined);
     const [openMetamaskDialog, setOpenMetamaskDialog] = useState(false);
     const [openNetworkDialog, setOpenNetworkDialog] = useState(false);
     const [openErrorDialog, setOpenErrorDialog] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [mintCount, setMintCount] = useState(1);
 
     // Check for provider and set signer if available
     useEffect(() => {
@@ -101,32 +97,6 @@ export default function Web3Button() {
             });
     }, []);
 
-    // Check sale state
-    useEffect(() => {
-        const getState = async () => {
-            if (contractABI && provider) {
-                const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, provider);
-
-                const isPaused = await contract.paused();
-                const isPresale = await contract.presale();
-                const isPublicSale = await contract.publicSale();
-                const state = JSON.stringify({ paused: isPaused, presale: isPresale, publicSale: isPublicSale });
-
-                if (!isPaused && (isPresale || isPublicSale)) {
-                    setIsSaleLive(true);
-                    console.log('sale is live: ' + state);
-                } else {
-                    console.log('sale is not live: ' + state);
-                }
-            }
-        }
-
-        getState()
-            .catch((error) => {
-                console.log('Failed to get contract sale state: ' + error);
-            });
-    }, [contractABI, provider])
-
     async function connect() {
         await provider.send("eth_requestAccounts", []);
         const signer = provider.getSigner();
@@ -136,8 +106,8 @@ export default function Web3Button() {
         setSignerAddress(signerAddress);
     }
 
-    async function mint() {
-        console.log('attempting mint for: ' + signerAddress);
+    async function checkWhitelist() {
+        console.log('checking whitelist for: ' + signerAddress);
 
         try {
             const contract = new ethers.Contract(CONTRACT_ADDRESS, contractABI, provider);
@@ -147,15 +117,11 @@ export default function Web3Button() {
                 body: JSON.stringify({ address: signerAddress })
             }).then(response => response.json());
 
-            await contract.connect(signer).mint(
-                mintCount,
-                response.proof,
-                { value: ethers.utils.parseEther((mintCount * .01).toString()) },
-            );
+            await contract.connect(signer).checkWhitelist(response.proof);
+
+            statusHandler(true);
         } catch (error) {
-            setOpenErrorDialog(true);
-            setErrorMessage(error.error.message)
-            throw error;
+            statusHandler(false);
         }
     }
 
@@ -166,21 +132,6 @@ export default function Web3Button() {
         setAccounts(undefined);
     }
 
-    function handleMintIncrease (e) {
-        e.stopPropagation();
-        if (mintCount < 4) {
-            setMintCount(mintCount + 1)
-        }
-    }
-
-    function handleMintDecrease (e) {
-        e.stopPropagation();
-        if (mintCount > 1) {
-            setMintCount(mintCount - 1)
-        }
-    }
-
-
     return (
         <>
             <NetworkErrorDialog openDialog={openNetworkDialog} setOpenDialog={setOpenNetworkDialog} />
@@ -189,30 +140,24 @@ export default function Web3Button() {
 
             {!isConnected &&
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-                <span className='rainbow' >6969 supply!</span>
                 <button
                     className='custom-btn btn-3'
                     onTouchEnd={(e) => { e.stopPropagation() }}
                     onClick={(e) => {
                         e.stopPropagation();
 
-                        if (!isSaleLive) {
-                            setOpenErrorDialog(true);
-                            setErrorMessage('Sale is not live yet');
+                        if (!provider) {
+                            setOpenMetamaskDialog(true);
+                        } else if (!networkSupported) {
+                            setOpenNetworkDialog(true);
                         } else {
-                            if (!provider) {
-                                setOpenMetamaskDialog(true);
-                            } else if (!networkSupported) {
-                                setOpenNetworkDialog(true);
-                            } else {
-                                connect()
-                                    .then(() => {
-                                        console.log('connected');
-                                        setConnected(true);
-                                    }).catch(() => {
-                                        console.log('failed to connect');
-                                    });
-                            }
+                            connect()
+                                .then(() => {
+                                    console.log('connected');
+                                    setConnected(true);
+                                }).catch(() => {
+                                    console.log('failed to connect');
+                                });
                         }
                 }}>
                     <span>Connect</span>
@@ -220,25 +165,14 @@ export default function Web3Button() {
             </div>}
             {isConnected && 
             <div>
-                <div className="qty mt-5 noselect">
-                    <span className="minus bg-dark" onClick={(e) => handleMintDecrease(e)}>-</span>
-                    <span type="number" readOnly className="count noselect" name="qty" >{mintCount}</span>
-                    <span className="plus bg-dark" onClick={(e) => handleMintIncrease(e)}>+</span>
-                </div>
                 <button
                     className='custom-btn btn-3'
                     onTouchEnd={(e) => { e.stopPropagation() }}
                     onClick={(e) => {
                         e.stopPropagation();
-                        mint()
-                            .then(() => {
-                                console.log('minted');
-                            })
-                            .catch((error) => {
-                                console.log('failed to mint: ' + error);
-                            });
+                        checkWhitelist();
                 }}>
-                    <span>Mint</span>
+                    <span>Check Whitelist</span>
                 </button>
             </div>
 

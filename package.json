@@ -49,6 +49,7 @@
     "keccak256": "^1.0.6",
     "merkletreejs": "^0.2.32",
     "react-router-dom": "^6.3.0",
-    "react-water-wave": "^2.0.1"
+    "react-water-wave": "^2.0.1",
+    "node-fetch": "^2.6.1"
   }
 }

@@ -2,19 +2,14 @@ import _ from 'lodash';
 import React, { useState } from 'react'
 
 import ErrorDialog from './ErrorDialog';
+import WhitelistCheckerButton from './WhitelistCheckerButton';
 
 import mintPage from '../assets/bunnypage.jpg';
 
 function WhitelistChecker() {
 
-    const [value, setValue] = useState('');
     const [whitelistState, setWhitelistState] = useState(0);
     const [openErrorDialog, setOpenErrorDialog] = useState(false);
-
-
-    const handleChange = event => {
-        setValue(event.target.value);
-    };
 
     return (
         <div>
@@ -22,28 +17,13 @@ function WhitelistChecker() {
 
             <img src={mintPage} style={{ height: window.innerHeight, width: '100%' }} />
             <div style={{ display: 'flex', flexDirection: 'column', position: 'absolute', top: '30%', right: '50%', transform: 'translate(50%, 50%)', gap: '10px' }}>
-                <input
-                    type='text'
-                    onChange={handleChange}
-                    value={value} />
-                <button
-                    style={{ width: '100%' }}
-                    className='custom-btn'
-                    onClick={async () => {
-                        try {
-                            setWhitelistState(0);
-                            if (!_.isEmpty(value)) {
-                                const response = await fetch('/.netlify/functions/checkWhitelist', {
-                                    method: 'POST',
-                                    body: JSON.stringify({ address: value })
-                                }).then(response => response.json());
-                                setWhitelistState(response.message ? 1 : 2);
-                            }
-                        } catch (e) {
-                            console.log(e);
-                            setOpenErrorDialog(true);
-                        }
-                    }}>Are you Wicked Enough?</button>
+            <WhitelistCheckerButton statusHandler={async (status)=> {
+                console.log(status)
+                setWhitelistState(0);
+                await new Promise(resolve => setTimeout(resolve, 500));
+                setWhitelistState(status ? 1 : 2)
+            }}/>
+
             </div>
             {whitelistState === 1 && <span
                 className='noselect'

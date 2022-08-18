@@ -4,7 +4,8 @@ const keccak256 = require("keccak256");
 
 exports.handler = async function (event, context) {
 
-    const whitelist = fs.readFileSync('./assets/whitelist.txt').toString().split("\n");
+    const whitelist = fs.readFileSync('./assets/whitelist.txt').toString().split("\r\n");
+    console.log(whitelist);
 
     const input = JSON.parse(event.body).address;
     console.log('generating proof for signer: ' + input);
@@ -13,8 +14,8 @@ exports.handler = async function (event, context) {
     const merkleTree = new MerkleTree(leafNodes, keccak256, { sortPairs: true });
 
     return {
-        statusCode: 200,
-        body: JSON.stringify({ proof: merkleTree.getHexProof(keccak256(input))
+            statusCode: 200,
+            body: JSON.stringify({ proof: merkleTree.getHexProof(keccak256(input))
         }),
     };
 };
