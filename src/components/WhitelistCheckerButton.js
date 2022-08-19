@@ -160,7 +160,7 @@ export default function WhitelistCheckerButton({ statusHandler }) {
                                 });
                         }
                 }}>
-                    <span>Connect</span>
+                    <span className='button-text' >Connect</span>
                 </button>
             </div>}
             {isConnected && 

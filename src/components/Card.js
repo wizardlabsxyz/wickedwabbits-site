@@ -40,15 +40,15 @@ export default function Card({ style, allowFlip }) {
                     backgroundRepeat: 'no-repeat',
                     display: 'flex', flexDirection: 'column', width: '100%', height: '100%', backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', borderRadius: '25px'
                 }}>
-                <span style={{ color: 'black', width: '100%', fontSize: '5vh'  }}>Flip the card to see</span>
+                <span className='text-large'>Flip the card to see</span>
                 <br></br>
-                <span style={{ color: 'black', width: '100%', fontSize: '5vh'  }}>One is on you</span>
+                <span className='text-large'>One is on you</span>
                 <br></br>
-                <span style={{ color: 'black', width: '100%', fontSize: '5vh'  }}>The other is free</span>
+                <span className='text-large'>The other is free</span>
                 <br></br>
-                <span style={{ color: 'black', width: '100%', fontSize: '5vh'  }}>Flip if you must</span>
+                <span className='text-large'>Flip if you must</span>
                 <br></br>
-                <span style={{ color: 'black', width: '100%', fontSize: '5vh'  }}>HODL if you trust</span>
+                <span className='text-large'>HODL if you trust</span>
             </motion.div>
             <motion.div
                 onClick={() => {
@@ -77,13 +77,12 @@ export default function Card({ style, allowFlip }) {
                     backgroundRepeat: 'no-repeat',
                     display: 'none', rotateY: 90, width: '100%', height: '100%', backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', borderRadius: '25px'
                 }}>
-                <span style={{ color: 'black', fontSize: '4vh'}}>0.01 eth + gas per wallet</span>
-                <span style={{ color: 'black', fontSize: '2.5vh'}}>1 free mint with every transaction</span>
+                <span className='text'>1 FREE MINT PER TRANSACTION</span>
+                <span className='text'>0.01 eth + gas per wallet</span>
                 <br></br>
-                <span style={{ color: 'black', fontSize: '4vh'}}>Nothing but Community</span>       
-                <span style={{ color: 'black', fontSize: '4vh' }}>No roadmap</span>
-                <span style={{ color: 'black', fontSize: '4vh' }}>No discord</span>        
-                <span style={{ color: 'black', fontSize: '4vh' }}>No utility</span>   
+                <span className='text'>Nothing but Community</span>       
+                <span className='text'>No roadmap</span>
+                <span className='text'>No discord</span>        
                 <br></br>
                 <Web3Button />
             </motion.div>

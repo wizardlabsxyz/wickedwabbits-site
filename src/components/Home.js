@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion';
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 import Loader from './Loader.js'
 import Card from './Card.js'

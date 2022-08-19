@@ -1,0 +1,24 @@
+@media only screen and (max-width: 600px) {
+
+  .text {
+    font-weight: 700;
+    font-family: 'Amatic SC', cursive;
+    font-size: 3.5vh;
+    color: black;
+  }
+  
+  .text-large {
+    font-weight: 700;
+    font-family: 'Amatic SC', cursive;
+    font-size: 5vh;
+    color: black;
+  }
+
+  .wickedlist-message {
+    font-weight: 700;
+    font-family: 'Amatic SC', cursive;
+    font-size: 7vh;
+    color: white;
+  }
+  
+}

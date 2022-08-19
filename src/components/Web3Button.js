@@ -5,7 +5,6 @@ import { ethers } from "ethers";
 
 import MetamaskErrorDialog from './MetamaskErrorDialog.js';
 import NetworkErrorDialog from './NetworkErrorDialog.js';
-import FailedMintDialog from './FailedMintDialog.js';
 import ErrorDialog from './ErrorDialog.js';
 
 export default function Web3Button() {
@@ -180,7 +179,6 @@ export default function Web3Button() {
         }
     }
 
-
     return (
         <>
             <NetworkErrorDialog openDialog={openNetworkDialog} setOpenDialog={setOpenNetworkDialog} />
@@ -196,26 +194,26 @@ export default function Web3Button() {
                     onClick={(e) => {
                         e.stopPropagation();
 
-                        if (!isSaleLive) {
-                            setOpenErrorDialog(true);
-                            setErrorMessage('Sale is not live yet');
+                        if (!provider) {
+                            setOpenMetamaskDialog(true);
+                        } else if (!networkSupported) {
+                            setOpenNetworkDialog(true);
                         } else {
-                            if (!provider) {
-                                setOpenMetamaskDialog(true);
-                            } else if (!networkSupported) {
-                                setOpenNetworkDialog(true);
+                            if (!isSaleLive) {
+                                setOpenErrorDialog(true);
+                                setErrorMessage('Sale is not live yet');
                             } else {
                                 connect()
-                                    .then(() => {
-                                        console.log('connected');
-                                        setConnected(true);
-                                    }).catch(() => {
-                                        console.log('failed to connect');
-                                    });
+                                .then(() => {
+                                    console.log('connected');
+                                    setConnected(true);
+                                }).catch(() => {
+                                    console.log('failed to connect');
+                                });
                             }
                         }
                 }}>
-                    <span>Connect</span>
+                    <span className='button-text'>Connect</span>
                 </button>
             </div>}
             {isConnected && 
@@ -238,7 +236,7 @@ export default function Web3Button() {
                                 console.log('failed to mint: ' + error);
                             });
                 }}>
-                    <span>Mint</span>
+                    <span className='button-text'>Mint</span>
                 </button>
             </div>
 
